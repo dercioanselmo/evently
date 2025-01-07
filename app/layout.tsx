@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 import "./globals.css";
 
@@ -20,13 +20,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={poppins.variable}>
+          
+          <SignedOut>
+            <SignInButton />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
           {children}
         </body>
       </html>
